@@ -1,0 +1,55 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "1323:1323"
+    networks:
+      - app-network
+    environment:
+      - APP_ENV=development
+    volumes:
+      - .:/app
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-dev
+    ports:
+      - "5173:5173"
+    environment:
+      - APP_ENV=development
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+  front-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-dev-test
+    environment:
+      - APP_ENV=test
+    volumes:
+      - .:/app
+    entrypoint: ["tail", "-f", "/dev/null"]
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: nginx-dev
+    ports:
+      - "8080:80"
+    environment:
+      - ENVIRONMENT=local
+    volumes:
+      - ./nginx/templates/proxy.local.conf.template:/etc/nginx/templates/proxy.conf.template
+      - ./public:/usr/share/nginx/html/public
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

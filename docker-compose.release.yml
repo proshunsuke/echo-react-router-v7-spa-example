@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: release
+    ports:
+      - "1323:1323"
+    networks:
+      - app-network
+    environment:
+      - APP_ENV=production
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: nginx-release
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
