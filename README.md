@@ -2,7 +2,7 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/b3e0ba9a-f46e-4a49-a692-ac48e51c5058
+[Video Screen1732957169333.webm](https://github.com/user-attachments/assets/400160f7-fd6e-4f9c-8869-64fa97ae0250)
 
 ## Features
 
