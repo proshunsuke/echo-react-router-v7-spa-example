@@ -7,7 +7,8 @@
     "dev": "react-router dev --host",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc --build --noEmit",
-    "test": "vitest --run"
+    "test": "vitest",
+    "test/ci": "vitest --run --browser.provider=playwright --browser.headless"
   },
   "dependencies": {
     "@mantine/core": "^7.14.2",
@@ -41,5 +42,8 @@
     "vite-tsconfig-paths": "^5.1.2",
     "vitest": "^2.1.6",
     "vitest-browser-react": "^0.0.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "4.28.0"
   }
 }

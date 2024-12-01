@@ -23,6 +23,7 @@ RUN apt-get update && \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY front .
+RUN npm i
 
 RUN npx playwright install && \
     npx playwright install-deps

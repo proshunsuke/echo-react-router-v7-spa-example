@@ -67,6 +67,12 @@ Run tests
 make test
 ```
 
+Run front tests in watch mode
+
+```bash
+make test/front/watch
+````
+
 Simulate production environment
 
 ```bash

@@ -16,6 +16,9 @@ import { type FC, useEffect } from "react";
 import { NavLink } from "react-router";
 import { LargeLogo } from "~/components/layout/largeLogo";
 import { SmallLogo } from "~/components/layout/smallLogo";
+import "~/app.css";
+import "@mantine/core/styles.css";
+import "@mantine/nprogress/styles.css";
 
 const theme = createTheme({
 	colors: {
@@ -39,11 +42,7 @@ export const LayoutBody: FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [opened, { toggle, close, open }] = useDisclosure(true);
 	const { width } = useViewportSize();
 	useEffect(() => {
-		if (width < 576) {
-			close();
-		} else {
-			open();
-		}
+		width < 576 ? close() : open();
 	}, [width, close, open]);
 	return (
 		<MantineProvider theme={theme}>

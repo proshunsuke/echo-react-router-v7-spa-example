@@ -1,3 +1,9 @@
+import { ColorSchemeScript, LoadingOverlay } from "@mantine/core";
+import { nprogress } from "@mantine/nprogress";
+import { LayoutBody } from "app/components/layout/layoutBody";
+import type React from "react";
+import { useEffect } from "react";
+import type { FC } from "react";
 import {
 	Links,
 	Meta,
@@ -8,15 +14,6 @@ import {
 	useNavigation,
 } from "react-router";
 import type { Route } from "./+types/root.ts";
-import "./app.css";
-import type React from "react";
-import { useEffect } from "react";
-import type { FC } from "react";
-import "@mantine/core/styles.css";
-import "@mantine/nprogress/styles.css";
-import { ColorSchemeScript, LoadingOverlay } from "@mantine/core";
-import { nprogress } from "@mantine/nprogress";
-import { LayoutBody } from "app/components/layout/layoutBody";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
