@@ -1,7 +1,7 @@
 .env
 !.env.example
 .DS_Store
-.react-router
+front/.react-router
 build
 node_modules
 *.tsbuildinfo

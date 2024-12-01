@@ -22,7 +22,7 @@ services:
     environment:
       - APP_ENV=development
     volumes:
-      - .:/app
+      - ./front:/app
     networks:
       - app-network
   front-test:
@@ -33,7 +33,7 @@ services:
     environment:
       - APP_ENV=test
     volumes:
-      - .:/app
+      - ./front:/app
     entrypoint: ["tail", "-f", "/dev/null"]
   nginx:
     build:
@@ -46,7 +46,7 @@ services:
       - ENVIRONMENT=local
     volumes:
       - ./nginx/templates/proxy.local.conf.template:/etc/nginx/templates/proxy.conf.template
-      - ./public:/usr/share/nginx/html/public
+      - ./front/public:/usr/share/nginx/html/public
     networks:
       - app-network
 

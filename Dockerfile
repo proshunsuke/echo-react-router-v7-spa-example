@@ -2,12 +2,12 @@ FROM node:22.11.0-alpine3.20 AS node-base
 
 WORKDIR /app
 
-COPY package*json tsconfig.json vite.config.ts ./
+COPY front/package*json front/tsconfig.json front/vite.config.ts ./
 RUN npm ci
 
 FROM node-base AS node-dev
 
-COPY . .
+COPY front .
 
 EXPOSE 3000
 
@@ -22,14 +22,14 @@ RUN apt-get update && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY . .
+COPY front .
 
 RUN npx playwright install && \
     npx playwright install-deps
 
 FROM node-base AS node-builder
 
-COPY . .
+COPY front .
 
 RUN npm run build
 
