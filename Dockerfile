@@ -39,20 +39,20 @@ WORKDIR /app
 
 RUN apk add --no-cache git
 
-COPY go.mod go.sum ./
+COPY server/go.mod server/go.sum ./
 RUN go mod download
 
 FROM base AS dev
 
 RUN go install github.com/air-verse/air@latest
 
-COPY . .
+COPY server .
 
 CMD ["air", "-c", ".air.toml"]
 
 FROM base AS builder
 
-COPY . .
+COPY server .
 
 RUN go build -ldflags="-s -w" -o echo-server ./server.go
 
