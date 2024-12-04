@@ -40,6 +40,7 @@ jobs:
       - name: Run front format and lint check
         run: |
           docker compose run --rm front sh -c '
+          npm install
           npm run typecheck
           npx @biomejs/biome ci
           '
