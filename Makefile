@@ -35,7 +35,7 @@ check/go:
 
 check/front:
 	make typecheck
-	docker compose exec front npx @biomejs/biome check --write --unsafe app
+	docker compose exec front npx @biomejs/biome check --write --unsafe
 
 test: test/front/ci
 
