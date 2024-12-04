@@ -28,14 +28,14 @@ jobs:
 
       - name: Run go format and lint check
         run: |
-          docker compose run --rm app sh -c '
-          FMT_OUTPUT=$(go fmt ./...)
-          if [ -n "$FMT_OUTPUT" ]; then
-            echo "$FMT_OUTPUT"
-            echo "Go formatting required. Please run \'go fmt ./...\'."
+          docker compose run --rm app sh -c "
+          FMT_OUTPUT=\$(go fmt ./...)
+          if [ -n \"\$FMT_OUTPUT\" ]; then
+            echo \"\$FMT_OUTPUT\"
+            echo \"Go formatting required. Please run 'go fmt ./...'.\"
             exit 1
           fi
-          '
+          "
 
       - name: Run front format and lint check
         run: |
