@@ -41,7 +41,7 @@ jobs:
 
       - name: Frontend Format and Lint Check
         run: |
-          docker compose exec front npm install
+          docker compose exec front npm install --maxsockets=1
           make typecheck
           docker compose exec front npx @biomejs/biome ci
 

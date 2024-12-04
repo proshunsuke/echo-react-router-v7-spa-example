@@ -32,7 +32,7 @@ jobs:
       
       - name: Run tests
         run: |
-          docker compose exec front-test npm install
+          docker compose exec front-test npm install --maxsockets=1
           make test
 
       - name: Shutdown services
