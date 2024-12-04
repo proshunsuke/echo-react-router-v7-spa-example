@@ -26,24 +26,18 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
-      - name: Run services
+      - name: Run go format and lint check
         run: |
-          docker compose up app front -d
-
-      - name: Go Format and Lint Check
-        run: |
-          FMT_OUTPUT=$(docker compose exec app go fmt ./...)
+          FMT_OUTPUT=$(docker compose run --rm app go fmt ./...)
           if [ -n "$FMT_OUTPUT" ]; then
             echo "$FMT_OUTPUT"
             echo "Go formatting required. Please run 'go fmt ./...'."
             exit 1
           fi
 
-      - name: Frontend Format and Lint Check
+      - name: Run front format and lint check
         run: |
-          docker compose exec front npm install --maxsockets=1
-          make typecheck
-          docker compose exec front npx @biomejs/biome ci
+          docker compose run --rm front make check/front/ci
 
       - name: Cleanup
         if: always()

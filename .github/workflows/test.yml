@@ -26,14 +26,9 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
-      - name: Run services
+      - name: Run front tests
         run: |
-          docker compose up app front-test -d
-      
-      - name: Run tests
-        run: |
-          docker compose exec front-test npm install --maxsockets=1
-          make test
+          docker compose run --rm front-test make test/front/ci
 
       - name: Shutdown services
         if: always()

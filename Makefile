@@ -37,10 +37,17 @@ check/front:
 	make typecheck
 	docker compose exec front npx @biomejs/biome check --write --unsafe
 
-test: test/front/ci
+test: test/front
 
-test/front/ci:
+test/front:
 	docker compose exec front-test npm run test/ci
 
 test/front/watch:
 	npm run test --prefix front
+
+check/front/ci:
+	npm run typecheck
+	npx @biomejs/biome ci
+
+test/front/ci:
+	npm run test/ci
