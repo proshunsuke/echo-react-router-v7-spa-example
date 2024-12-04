@@ -32,14 +32,16 @@ jobs:
 
       - name: Go Format and Lint Check
         run: |
-          make check/go | tee gofmt.log
-          if [ -s gofmt.log ]; then
+          FMT_OUTPUT=$(docker compose exec app go fmt ./...)
+          if [ -n "$FMT_OUTPUT" ]; then
+            echo "$FMT_OUTPUT"
             echo "Go formatting required. Please run 'go fmt ./...'."
             exit 1
           fi
 
       - name: Frontend Format and Lint Check
         run: |
+          docker compose exec front npm install
           make typecheck
           docker compose exec front npx @biomejs/biome ci
 
