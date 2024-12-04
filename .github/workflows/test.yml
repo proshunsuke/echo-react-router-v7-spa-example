@@ -28,7 +28,7 @@ jobs:
 
       - name: Run front tests
         run: |
-          docker compose run --rm front-test sh -c '
+          docker compose run --rm --entrypoint "" front-test sh -c '
           npm run test/ci
           '
 
