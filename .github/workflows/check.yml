@@ -1,0 +1,51 @@
+name: Format and Lint Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  format-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Restore Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build services
+        run: |
+          docker compose build --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache
+          
+      - name: Run services
+        run: |
+          docker compose up app front -d
+
+      - name: Go Format and Lint Check
+        run: |
+          make check/go | tee gofmt.log
+          if [ -s gofmt.log ]; then
+            echo "Go formatting required. Please run 'go fmt ./...'."
+            exit 1
+          fi
+
+      - name: Frontend Format and Lint Check
+        run: |
+          make typecheck
+          docker compose exec front npx @biomejs/biome ci
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down
