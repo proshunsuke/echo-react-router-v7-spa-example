@@ -23,8 +23,8 @@ jobs:
           load: true
           context: .
           file: Dockerfile
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Run go format and lint check
         run: |
