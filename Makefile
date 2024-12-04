@@ -44,10 +44,3 @@ test/front:
 
 test/front/watch:
 	npm run test --prefix front
-
-check/front/ci:
-	npm run typecheck
-	npx @biomejs/biome ci
-
-test/front/ci:
-	npm run test/ci

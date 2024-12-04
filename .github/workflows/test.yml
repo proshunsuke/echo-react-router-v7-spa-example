@@ -28,7 +28,9 @@ jobs:
 
       - name: Run front tests
         run: |
-          docker compose run --rm front-test make test/front/ci
+          docker compose run --rm front-test sh -c '
+          npm run test/ci
+          '
 
       - name: Shutdown services
         if: always()
