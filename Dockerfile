@@ -34,7 +34,7 @@ COPY front .
 
 RUN npm run build
 
-FROM golang:1.23.2-alpine3.20 AS base
+FROM golang:1.23.4-alpine3.20 AS base
 
 WORKDIR /app
 
