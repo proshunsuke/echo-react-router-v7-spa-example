@@ -69,7 +69,7 @@ USER appuser
 
 CMD ["echo-server"]
 
-FROM nginx:1.26.2 AS nginx-base
+FROM nginx:1.27.3 AS nginx-base
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
