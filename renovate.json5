@@ -12,7 +12,6 @@
     {
       matchUpdateTypes: ["minor", "patch"],
       groupName: "All Minor and Patch Packages Updates",
-      separateMajorMinor: false
     }
   ],
   customManagers: [
