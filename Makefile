@@ -5,6 +5,24 @@ compose/build/release:
 	docker compose -f docker-compose.release.yml build --no-cache
 
 compose/up:
+	@{ \
+      while ! curl --fail --silent --head http://localhost:8080; do \
+        echo "Waiting for the service to be ready..."; \
+        sleep 1; \
+      done; \
+      if command -v xdg-open > /dev/null; then \
+		xdg-open http://localhost:8080; \
+	  elif command -v open > /dev/null; then \
+		open http://localhost:8080; \
+	  else \
+	    echo ""; \
+	    echo "============================================"; \
+	    echo " SERVICE IS READY "; \
+	    echo " Please open http://localhost:8080 in your browser "; \
+	    echo "============================================"; \
+	    echo ""; \
+	  fi; \
+    } & \
 	docker compose up
 
 compose/up/release:

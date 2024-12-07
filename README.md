@@ -30,16 +30,11 @@
 
 ## Instruction
 
-1. Launch app using docker compose
+Launch app using docker compose
 
 ```bash
 make compose/up
 ```
-
-2. Access app
-
-http://localhost:8080/
-
 ## Development
 
 Rebuild docker image
