@@ -1,0 +1,31 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:best-practices"
+  ],
+  schedule: [
+    "on weekday at 9am"
+  ],
+  timezone: "Asia/Tokyo",
+  prHourlyLimit: 0,
+  packageRules: [
+    {
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "All Minor and Patch Packages Updates",
+      separateMajorMinor: false
+    }
+  ],
+  customManagers: [
+    {
+      customType: "regex",
+      datasourceTemplate: "npm",
+      depNameTemplate: "@biomejs/biome",
+      fileMatch: [
+        "(^|/)biome.jsonc?$"
+      ],
+      matchStrings: [
+        "\"https://biomejs.dev/schemas/(?<currentValue>[^\"]+)/schema.json\""
+      ]
+    }
+  ]
+}
