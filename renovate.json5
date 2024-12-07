@@ -11,7 +11,7 @@
   packageRules: [
     {
       matchUpdateTypes: ["minor", "patch"],
-      groupName: "All Minor and Patch Packages Updates",
+      groupName: "all minor and patch packages",
     }
   ],
   customManagers: [
