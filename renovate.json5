@@ -4,7 +4,7 @@
     "config:best-practices"
   ],
   schedule: [
-    "on weekday at 9am"
+    "every Wednesday after 8am before 12pm"
   ],
   timezone: "Asia/Tokyo",
   prHourlyLimit: 0,
