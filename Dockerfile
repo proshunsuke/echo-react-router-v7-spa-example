@@ -1,4 +1,4 @@
-FROM node:22.11.0-alpine3.20@sha256:b64ced2e7cd0a4816699fe308ce6e8a08ccba463c757c00c14cd372e3d2c763e AS node-base
+FROM node:22.12.0-alpine3.20@sha256:96cc8323e25c8cc6ddcb8b965e135cfd57846e8003ec0d7bcec16c5fd5f6d39f AS node-base
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
 
-FROM node:22.11.0@sha256:ec878c763e9fad09d22aae86e2edcb7a05b397dfe8411c16e2b90158d595e2ce AS node-dev-test
+FROM node:22.12.0@sha256:35a5dd72bcac4bce43266408b58a02be6ff0b6098ffa6f5435aeea980a8951d7 AS node-dev-test
 
 WORKDIR /app
 
@@ -34,7 +34,7 @@ COPY front .
 
 RUN npm run build
 
-FROM golang:1.23.2-alpine3.20@sha256:9dd2625a1ff2859b8d8b01d8f7822c0f528942fe56cfe7a1e7c38d3b8d72d679 AS base
+FROM golang:1.23.4-alpine3.20@sha256:9a31ef0803e6afdf564edc8ba4b4e17caed22a0b1ecd2c55e3c8fdd8d8f68f98 AS base
 
 WORKDIR /app
 
@@ -57,7 +57,7 @@ COPY server .
 
 RUN go build -ldflags="-s -w" -o echo-server ./server.go
 
-FROM alpine:3.20@sha256:1e42bbe2508154c9126d48c2b8a75420c3544343bf86fd041fb7527e017a4b4a AS release
+FROM alpine:3.21@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS release
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
@@ -69,7 +69,7 @@ USER appuser
 
 CMD ["echo-server"]
 
-FROM nginx:1.26.2@sha256:1a476ecee5324eaa2f5d8d46b8416293bc52b8b9306378e44a912508ee13b75e AS nginx-base
+FROM nginx:1.27.3@sha256:fb197595ebe76b9c0c14ab68159fd3c08bd067ec62300583543f0ebda353b5be AS nginx-base
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
