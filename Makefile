@@ -4,7 +4,7 @@ compose/build:
 compose/build/release:
 	docker compose -f docker-compose.release.yml build --no-cache
 
-compose/up:
+compose/up: front/node_modules
 	@{ \
       while ! curl --fail --silent --head http://localhost:8080; do \
         echo "Waiting for the service to be ready..."; \
@@ -42,6 +42,9 @@ run/front:
 
 build/front:
 	docker compose exec front npm run build
+
+front/node_modules:
+	mkdir front/node_modules
 
 typecheck:
 	docker compose exec front npm run typecheck
