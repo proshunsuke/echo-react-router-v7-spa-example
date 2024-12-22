@@ -23,6 +23,7 @@ services:
       - APP_ENV=development
     volumes:
       - ./front:/app
+      - node_modules:/app/node_modules
     networks:
       - app-network
   front-test:
@@ -34,6 +35,7 @@ services:
       - APP_ENV=test
     volumes:
       - ./front:/app
+      - node_modules:/app/node_modules
     entrypoint: ["tail", "-f", "/dev/null"]
   nginx:
     build:
@@ -53,3 +55,10 @@ services:
 networks:
   app-network:
     driver: bridge
+volumes:
+  node_modules:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/front/node_modules
+      o: bind
