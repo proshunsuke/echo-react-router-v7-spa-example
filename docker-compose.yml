@@ -12,19 +12,6 @@ services:
       - APP_ENV=development
     volumes:
       - ./server:/app
-  front:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: node-dev
-    ports:
-      - "5173:5173"
-    environment:
-      - APP_ENV=development
-    volumes:
-      - ./front:/app
-    networks:
-      - app-network
   front-test:
     build:
       context: .

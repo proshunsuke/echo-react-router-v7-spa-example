@@ -39,8 +39,8 @@ jobs:
 
       - name: Run front format and lint check
         run: |
-          docker compose run --rm front sh -c '
-          npm install
+          docker compose run --rm --entrypoint "" front-test sh -c '
+          npm ci
           npm run typecheck
           npx @biomejs/biome ci
           '

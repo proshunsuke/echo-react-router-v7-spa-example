@@ -12,6 +12,9 @@ export default defineConfig({
 			plugins: [tailwindcss, autoprefixer],
 		},
 	},
+	server: {
+		open: "http://localhost:8080/",
+	},
 	plugins: [isTest ? null : reactRouter(), tsconfigPaths()],
 	optimizeDeps: {
 		include: [

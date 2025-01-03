@@ -1,18 +1,5 @@
 FROM node:22.12.0-alpine3.20@sha256:96cc8323e25c8cc6ddcb8b965e135cfd57846e8003ec0d7bcec16c5fd5f6d39f AS node-base
 
-WORKDIR /app
-
-COPY front/package*json front/tsconfig.json front/vite.config.ts ./
-RUN npm ci
-
-FROM node-base AS node-dev
-
-COPY front .
-
-EXPOSE 3000
-
-CMD ["npm", "run", "dev"]
-
 FROM node:22.12.0@sha256:35a5dd72bcac4bce43266408b58a02be6ff0b6098ffa6f5435aeea980a8951d7 AS node-dev-test
 
 WORKDIR /app
@@ -22,15 +9,20 @@ RUN apt-get update && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY front .
-RUN npm i
+COPY front /app/
+
+RUN npm ci
 
 RUN npx playwright install && \
     npx playwright install-deps
 
 FROM node-base AS node-builder
 
-COPY front .
+WORKDIR /app
+
+COPY front /app/
+
+RUN npm ci
 
 RUN npm run build
 

@@ -5,24 +5,6 @@ compose/build/release:
 	docker compose -f docker-compose.release.yml build --no-cache
 
 compose/up:
-	@{ \
-      while ! curl --fail --silent --head http://localhost:8080; do \
-        echo "Waiting for the service to be ready..."; \
-        sleep 1; \
-      done; \
-      if command -v xdg-open > /dev/null; then \
-		xdg-open http://localhost:8080; \
-	  elif command -v open > /dev/null; then \
-		open http://localhost:8080; \
-	  else \
-	    echo ""; \
-	    echo "============================================"; \
-	    echo " SERVICE IS READY "; \
-	    echo " Please open http://localhost:8080 in your browser "; \
-	    echo "============================================"; \
-	    echo ""; \
-	  fi; \
-    } & \
 	docker compose up
 
 compose/up/release:
@@ -31,20 +13,14 @@ compose/up/release:
 shell/app:
 	docker compose exec app /bin/sh
 
-shell/front:
-	docker compose exec front /bin/sh
-
 run/app:
 	docker compose run app /bin/sh
 
-run/front:
-	docker compose run front /bin/sh
+dev/front: install/front
+	cd front && npm run dev
 
-build/front:
-	docker compose exec front npm run build
-
-typecheck:
-	docker compose exec front npm run typecheck
+install/front:
+	cd front && npm ci
 
 check: check/go check/front
 
@@ -52,13 +28,13 @@ check/go:
 	docker compose exec app go fmt ./...
 
 check/front:
-	make typecheck
-	docker compose exec front npx @biomejs/biome check --write --unsafe
+	cd front && npm run typecheck
+	cd front && npx @biomejs/biome check --write --unsafe
 
 test: test/front
 
 test/front:
-	docker compose exec front-test npm run test/ci
+	docker compose exec front-test sh -c "npm ci && npm run test/ci"
 
 test/front/watch:
-	npm run test --prefix front
+	cd front && npm ci && npm run test
