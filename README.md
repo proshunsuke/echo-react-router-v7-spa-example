@@ -35,6 +35,13 @@ Launch app using docker compose
 ```bash
 make compose/up
 ```
+
+Launch frontend dev server
+
+```bash
+make dev/front
+```
+
 ## Development
 
 Rebuild docker image
@@ -47,7 +54,6 @@ Enter docker container
 
 ````bash
 make shell/app
-make shell/front
 ````
 
 Run lint and format
