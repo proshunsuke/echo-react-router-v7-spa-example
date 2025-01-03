@@ -76,4 +76,3 @@ FROM nginx-base AS nginx-release
 COPY nginx/templates/proxy.release.conf.template /etc/nginx/templates/proxy.conf.template
 
 COPY --from=node-builder /app/build /usr/share/nginx/html/build
-COPY --from=node-builder /app/public /usr/share/nginx/html/public
