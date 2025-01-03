@@ -25,9 +25,9 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@react-router/dev": "7.0.2",
-		"@types/node": "22.10.2",
-		"@types/react": "18.3.17",
+		"@react-router/dev": "7.1.1",
+		"@types/node": "22.10.5",
+		"@types/react": "18.3.18",
 		"@types/react-dom": "18.3.5",
 		"@vitejs/plugin-react": "4.3.4",
 		"@vitest/browser": "2.1.8",
@@ -44,6 +44,6 @@
 		"vitest-browser-react": "0.0.4"
 	},
 	"optionalDependencies": {
-		"@rollup/rollup-darwin-arm64": "4.28.1"
+		"@rollup/rollup-darwin-arm64": "4.29.1"
 	}
 }
