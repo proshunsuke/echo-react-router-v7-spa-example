@@ -53,7 +53,8 @@ jobs:
 
       - name: Run go format and lint check
         run: |
-          docker compose run --rm app sh -c "
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm app sh -c "
+          set -e
           FMT_OUTPUT=\$(go fmt ./...)
           if [ -n \"\$FMT_OUTPUT\" ]; then
             echo \"\$FMT_OUTPUT\"
@@ -65,6 +66,7 @@ jobs:
       - name: Run front format and lint check
         run: |
           docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm --entrypoint "" front-test sh -c '
+          set -e
           npm ci
           npm run typecheck
           npx @biomejs/biome ci
