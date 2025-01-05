@@ -7,8 +7,8 @@
 		"dev": "react-router dev --host",
 		"start": "react-router-serve ./build/server/index.js",
 		"typecheck": "react-router typegen && tsc --build --noEmit",
-		"test": "vitest",
-		"test/ci": "vitest --run --browser.provider=playwright --browser.headless"
+		"test": "vitest --config vitest.config.ts",
+		"test/ci": "vitest --config vitest.config.ts --run --browser.provider=playwright --browser.headless"
 	},
 	"dependencies": {
 		"@mantine/core": "^7.14.2",

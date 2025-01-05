@@ -27,7 +27,7 @@ check: check/go check/front
 check/go:
 	docker compose exec app go fmt ./...
 
-check/front:
+check/front: install/front
 	cd front && npm run typecheck
 	cd front && npx @biomejs/biome check --write --unsafe
 
