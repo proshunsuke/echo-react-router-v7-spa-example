@@ -1,0 +1,10 @@
+services:
+  app:
+    image: myapp/app:dev
+    build: null
+  front-test:
+    image: myapp/front-test:dev
+    build: null
+  nginx:
+    image: myapp/nginx:dev
+    build: null
