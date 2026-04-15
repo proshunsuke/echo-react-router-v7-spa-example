@@ -11,9 +11,9 @@
 		"test/ci": "vitest --config vitest.config.ts --run --browser.provider=playwright --browser.headless"
 	},
 	"dependencies": {
-		"@mantine/core": "^7.14.2",
-		"@mantine/hooks": "^7.14.2",
-		"@mantine/nprogress": "^7.14.3",
+		"@mantine/core": "^9.0.0",
+		"@mantine/hooks": "^9.0.0",
+		"@mantine/nprogress": "^9.0.0",
 		"@react-router/fs-routes": "^7.0.1",
 		"@react-router/node": "^7.0.1",
 		"@react-router/serve": "^7.0.1",
