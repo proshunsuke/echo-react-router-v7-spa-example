@@ -49,7 +49,7 @@ COPY server .
 
 RUN go build -ldflags="-s -w" -o echo-server ./server.go
 
-FROM alpine:3.21@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS release
+FROM alpine:3.21@sha256:ce64758a109eb420d874a118f87920e625e12d3634e03b4a5573fd9f6e5d3507 AS release
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
